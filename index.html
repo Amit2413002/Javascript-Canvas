@@ -1,48 +1,85 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="path/to/chartjs/dist/Chart.min.css">
+<script>
+    var dataPoints=[];
+window.onload = function () {
+	var chart = new CanvasJS.Chart("chartContainer", {
+	title:{
+		text: "Shell Sort: Running Time"
+	},
+	
+	
+	toolTip: {
+		shared: true
+	},
+	legend: {
+		cursor: "pointer",
+		itemclick: toggleDataSeries
+	},
+	data: [{
+		type: "line",
+		name: "Best Case",
+		color: "#369EAD",
+		showInLegend: true,
+		
 
-    <title>My chart.js charts</title>
+		dataPoints: [
+			{  y: 41}, 
+			{  y: 118 },
+			{  y: 178 },
+			{  y: 320 },
+			{  y: 400 }
+			]
+
+	},
+	{
+		type: "line",
+		name: "average Case",
+		color: "#C24642",
+	
+		showInLegend: true,
+		dataPoints: [
+			{  y: 49 }, 
+			{  y: 140 },
+			{ y: 229 },
+			{  y: 390 },
+			{  y: 512 }
+			]
+	},
+	{
+		type: "line",
+		name: "Worst Case",
+		color: "#7F6084",
+		axisYType: "secondary",
+        
+
+		showInLegend: true,
+		dataPoints: [
+			{  y: 49}, 
+			{  y: 144 },
+			{  y: 230 },
+			{  y: 392 },
+			{  y: 480 }
+			]
+	}]
+});
+chart.render();
+
+function toggleDataSeries(e) {
+	if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+		e.dataSeries.visible = false;
+	} else {
+		e.dataSeries.visible = true;
+	}
+	e.chart.render();
+}
+
+}
+</script>
 </head>
 <body>
-    <div class="container">
-        <canvas id="myChart"></canvas>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-    
-    <script>
-        let myChart = document.getElementById('myChart').getContext('2d');
-
-        let massPopChart = new Chart(myChart,{
-
-            type:'bar',//bar,line kuch bhi kr sakta hai hm
-            data:{
-                labels:['Delhi','Mumbai','Muzaffarnagar','Ghaziabad','Nodia'],
-                datasets:[{
-                    label:'population',
-                    data:[
-                        250008,
-                        456123,
-                        741852,
-                        852369,
-                        321456
-                    ],
-                    backgroundColor:[
-                        'red',
-                        'Green',
-                        'yellow',
-                        'brown',
-                        'pink'
-                    ]
-                }]
-            },
-            option:{}
-        });
-    </script>
+<div id="chartContainer" style="height: 300px; width: 400px"></div>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </body>
 </html>
